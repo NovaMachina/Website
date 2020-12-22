@@ -29,6 +29,14 @@ router.get('/', async (req, res) => {
         let meta = await Meta.findOne({
             revision: "1.0"
         });
+        if (meta == null) {
+            meta = await generateMeta();
+            res.send({
+                forgeVersions: meta.forgeVersions,
+                modOptions: meta.mods
+            });
+            return;
+        }
         updateForgeVersions(meta);
         res.send({
             forgeVersions: meta.forgeVersions,
@@ -68,13 +76,20 @@ router.put('/mod', async (req, res) => {
 });
 
 async function updateForgeVersions(meta) {
-    let timestampDifference = meta.lastUpdated - new Date().getTime();
+    let timestampDifference = new Date().getTime() - meta.lastUpdated;
     let maxTimeDifference = 60 * 60 * 1000;
     if (timestampDifference >= maxTimeDifference) {
         meta.forgeVersions = await getNewVersions();
         meta.lastUpdated = new Date().getTime();
         await meta.save();
     }
+}
+
+async function generateMeta() {
+    let meta = new Meta();
+    meta.forgeVersions = await getNewVersions();
+    meta.save();
+    return meta;
 }
 
 async function getNewVersions() {
