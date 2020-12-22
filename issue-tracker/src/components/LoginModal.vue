@@ -23,6 +23,7 @@
           required
           v-model="password"
           placeholder="Password"
+          type="password"
         />
       </b-form-group>
       <div class="buttons">
