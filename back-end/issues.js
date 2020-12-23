@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const multer = require('multer');
+const nodemailer = require('nodemailer');
+const fs = require('fs');
 const router = express.Router();
 const users = require('./users.js');
+const e = require('express');
 
 const upload = multer({
     dest: '/var/www/issues.jacob-williams.me/images',
@@ -10,6 +13,29 @@ const upload = multer({
         fileSize: 10000000
     }
 });
+
+var emailConfig = JSON.parse(fs.readFileSync('emailConfig.json', 'utf8'));
+
+let transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com",
+    secureConnection: false,
+    port: 587,
+    tls: {
+        ciphers: 'SSLv3'
+    },
+    auth: {
+        user: emailConfig.username,
+        pass: emailConfig.password
+    }
+});
+
+var mailOptions = {
+    from: '"NovaMachina Mods Issues " ' + emailConfig.sender,
+    to: emailConfig.recipiant,
+    // subject: 'Test Email',
+    // text: 'Hello World!',
+    // html: '<b>Hello World!</b><br>This is the first email sent with Nodemailer in Node.js'
+};
 
 const User = users.model;
 const validUser = users.valid;
@@ -101,6 +127,7 @@ router.post('/', validUser, async (req, res) => {
     });
     try {
         await issue.save();
+        sendEmail(issue);
         return res.send({
             issue: this.issue
         });
@@ -182,6 +209,18 @@ async function getUrlSlug(title) {
     } while (foundExisting)
 
     return proposedSlug;
+}
+
+async function sendEmail(issue) {
+    mailOptions.subject = "New Issue: " + issue.title
+    mailOptions.text = issue.description;
+    mailOptions.html = "<h3>" + issue.title + "</h3><br><p>" + issue.description + "</p><br><p>Submitted on: " + issue.created + "</p>";
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if(error) {
+            return console.log(error);
+        }
+    });
 }
 
 module.exports = {
