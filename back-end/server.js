@@ -35,4 +35,7 @@ app.use('/api/issues', issues.routes);
 const meta = require('./meta.js');
 app.use('/api/meta', meta.routes);
 
+const other = require('./other.js');
+app.use('/api/other', other.routes);
+
 app.listen(3001, () => console.log("Server listening on port 3001"));

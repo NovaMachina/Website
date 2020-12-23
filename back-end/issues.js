@@ -5,7 +5,6 @@ const nodemailer = require('nodemailer');
 const fs = require('fs');
 const router = express.Router();
 const users = require('./users.js');
-const e = require('express');
 
 const upload = multer({
     dest: '/var/www/issues.jacob-williams.me/images',
