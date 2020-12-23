@@ -19,28 +19,45 @@
         <b-row>
           <b-col>
             <p>
-              I am currently an undergrad at Brigham Young University
-              studying Computer Science with an emphasis in Software Engineering.
-              I will be graduating in April 2021. I am a proficient Java developer
-              with some experience in C, C++, and Python.
-              I'm also an avid front-end developer, with experience in Vue.js, JavaScript, Node.js,
-              and Android app development.
+              I am currently an undergrad at Brigham Young University studying
+              Computer Science with an emphasis in Software Engineering. I will
+              be graduating in April 2021. I am a proficient Java developer with
+              some experience in C, C++, and Python. I'm also an avid front-end
+              developer, with experience in Vue.js, JavaScript, Node.js, and
+              Android app development.
             </p>
             <p>
-              I'm currently looking for an entry level Junior Developer position.
+              I'm currently looking for an entry level Junior Developer
+              position.
             </p>
             <p>
-              In my freetime I enjoy playing board games, reading books, hanging out
-              with friends, and working on some of my programming projects. I do enjoy
-              the outdoors (camping and hiking), but unfortunately the outdoors do not
-              like me (I've got some pretty bad seasonal allergies).
+              In my freetime I enjoy playing board games, reading books, hanging
+              out with friends, and working on some of my programming projects.
+              I do enjoy the outdoors (camping and hiking), but unfortunately
+              the outdoors do not like me (I've got some pretty bad seasonal
+              allergies).
             </p>
           </b-col>
           <b-col>
+            <h3>Interests</h3>
             <ul>
-              <li>Item 1</li>
-              <li>Item 2</li>
-              <li>Item 3</li>
+              <li>
+                I've never been very good at developing front-end applications,
+                however, as I learn about more tools they've become fun to play
+                with. I've started to enjoy building full-stack applications.
+              </li>
+              <li>
+                Developing Minecraft mods has been my primary source of
+                projects. They keep me busy and engaged with developing
+                software. It's always fun to know people are using my software
+                and to interact with the community.
+              </li>
+              <li>
+                Currently I'm a Windows only user. However, I've awlays wanted
+                to switch to Linux full time. Unfortunately, I just cant' cut
+                the ties to Windows 100%. Still waiting for better Linux support
+                on some of those games I like to play.
+              </li>
             </ul>
           </b-col>
         </b-row>
@@ -204,12 +221,15 @@ export default {
   padding-top: 10%;
   padding-bottom: 10%;
 }
-#about,
+#about {
+  background-color: #34345238;
+  padding-top: 2%;
+}
+
 #protfolio {
   background-color: #34345238;
-  padding-top: 8%;
-  padding-bottom: 15%;
-  /* padding:15% */
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 .about-text {
   text-align: left;
